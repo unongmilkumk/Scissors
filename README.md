@@ -19,6 +19,7 @@
 - Lore Setting : ```ItemMaker#.lore(<list of lore>)```
 - Unbreakable Setting : ```ItemMaker#.unbreakable(true / false)```
 
+
 ##Examples
 
 ### Case 1
