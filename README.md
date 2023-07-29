@@ -21,7 +21,7 @@
 
 ##Examples
 
-# Case 1
+### Case 1
 - Code : 
 ``` 
 new CommandMaker("sciplugin", "scissors").setCommand((sender, args) -> {
