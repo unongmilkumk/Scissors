@@ -24,7 +24,7 @@
 
 ### Case 1
 - Code : 
-``` 
+```java
 new CommandMaker("sciplugin", "scissors").setCommand((sender, args) -> {
   sender.sendMessage("scissors");
   if (sender instanceof Player player) {
