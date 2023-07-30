@@ -37,7 +37,7 @@ dependencies {
 - Register : ```CommandMaker#.register()```
 
 ### ItemMaker
-- Initializing : ```new ItemMaker(<Material>)```(MakeItem) or ```new itemMaker(<Item>)``` (CopyItem)
+- Initializing : ```new ItemMaker(<Material>)``` (MakeItem) or ```new itemMaker(<Item>)``` (CopyItem)
 - Name Setting : ```ItemMaker#.name(<name>)```
 - Lore Setting : ```ItemMaker#.lore(<list of lore>)```
 - Unbreakable Setting : ```ItemMaker#.unbreakable(true / false)```
