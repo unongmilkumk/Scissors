@@ -5,11 +5,24 @@
 - Paper Server
 - Basic of the Plugin Development Concept
 
-## Feature
-- CommandMaker Does not Have to write a plugin.yml commands:
+##What is the benefit to use this?
+- Don't have to write plugin.yml commands:
+- Can code to intuitive
+- Inexperienced programmer also can use
 
 
-## Usage
+## How to Import
+```gradle 
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.github.unongmilkumk:Scissors:1.0.0'
+}
+```
+
+## How to Use
 
 ### CommandMaker
 - Initializing : ```new CommandMaker("<namespace>", "<command name>")```
@@ -28,7 +41,7 @@
 
 ### Case 1
 - Code : 
-```java
+```java 
 new CommandMaker("sciplugin", "scissors").setCommand((sender, args) -> {
   sender.sendMessage("scissors");
   if (sender instanceof Player player) {
@@ -38,4 +51,8 @@ new CommandMaker("sciplugin", "scissors").setCommand((sender, args) -> {
   }).setAlias(List.of("sci")).register();
 ```
 - Result : 
-``` When type /scissors or /sci -> send "scissors" and give Diamond Sword Named Ultra Sword Lored This is Ultra Sword```
+``` 
+When type /scissors or /sci -> 
+send "scissors"
+give Diamond Sword named "Ultra Sword" lored "This is Ultra Sword"
+```

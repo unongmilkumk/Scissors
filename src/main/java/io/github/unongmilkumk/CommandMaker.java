@@ -18,7 +18,6 @@ public class CommandMaker {
     public CommandMaker(String namespace, String name) {
         this.namespace = namespace;
         this.name = name;
-
     }
 
     public CommandMaker setCommand(BiConsumer<CommandSender, String[]> command) {
