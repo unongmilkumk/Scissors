@@ -5,7 +5,7 @@
 - Paper Server
 - Basic of the Plugin Development Concept
 
-##What is the benefit to use this?
+## What is the benefit to use this?
 - Don't have to write plugin.yml commands:
 - Can code to intuitive
 - Inexperienced programmer also can use
