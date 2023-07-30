@@ -5,6 +5,12 @@
 - Paper Server
 - Basic of the Plugin Development Concept
 
+## Support Version
+```
+1.20.1 (Main Version)
+1.16 ~ (Untested)
+``` 
+
 ## What is the benefit to use this?
 - Don't have to write plugin.yml commands:
 - Can code to intuitive
@@ -31,10 +37,21 @@ dependencies {
 - Register : ```CommandMaker#.register()```
 
 ### ItemMaker
-- Initiallizing : ```new ItemMaker(<Material>)```
+- Initializing : ```new ItemMaker(<Material>)```(MakeItem) or ```new itemMaker(<Item>)``` (CopyItem)
 - Name Setting : ```ItemMaker#.name(<name>)```
 - Lore Setting : ```ItemMaker#.lore(<list of lore>)```
 - Unbreakable Setting : ```ItemMaker#.unbreakable(true / false)```
+
+### ConfigMaker
+- Initializing : ```new ConfigMaker(<Plugin>, "<ConfigName>.yml"```
+- Has : ```ConfigMaker#.has(<path>)``` -> Boolean of Contains "path"
+- Get : ```ConfigMaker#.get(<path>)``` -> value of "path"
+- Set : ```ConfigMaker#.set(<path>, <value>)``` -> set value of "path"
+- Save : ```ConfigMaker#.save()``` -> Save Config
+
+### Region
+- Initializing : ```new Region(<World>, <x, y, z>, <x, y, z>)``` or ```new Region(<Location>, <Location>)```
+- Contains : ```Region#.contains(<Region or Location>)```
 
 
 ## Examples
