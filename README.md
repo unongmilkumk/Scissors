@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.unongmilkumk:Scissors:1.0.0'
+    implementation 'io.github.unongmilkumk:Scissors:1.0.1'
 }
 ```
 
