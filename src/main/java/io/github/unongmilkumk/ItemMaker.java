@@ -1,4 +1,4 @@
-package com.scissors;
+package io.github.unongmilkumk;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

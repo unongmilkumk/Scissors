@@ -1,24 +1,24 @@
 plugins {
-    id 'java'
+    id "java"
 }
 
-group = 'com.scissors'
-version = '1.0'
+apply plugin: "java"
+apply plugin: "maven-publish"
+apply plugin: "signing"
+
+group = "com.scissors"
+version = "1.0"
 
 repositories {
     mavenCentral()
     maven {
-        name = 'papermc-repo'
-        url = 'https://repo.papermc.io/repository/maven-public/'
-    }
-    maven {
-        name = 'sonatype'
-        url = 'https://oss.sonatype.org/content/groups/public/'
+        name = "papermc-repo"
+        url = "https://repo.papermc.io/repository/maven-public/"
     }
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT'
+    compileOnly "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
 }
 
 def targetJavaVersion = 17
@@ -40,8 +40,53 @@ tasks.withType(JavaCompile).configureEach {
 processResources {
     def props = [version: version]
     inputs.properties props
-    filteringCharset 'UTF-8'
-    filesMatching('plugin.yml') {
+    filteringCharset "UTF-8"
+    filesMatching("plugin.yml") {
         expand props
     }
 }
+
+publishing {
+    repositories {
+        maven {
+            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = findProperty("ossrhUsername")
+                password = findProperty("ossrhPassword")
+            }
+        }
+    }
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            pom {
+                name = "Scissors"
+                description = "Scissors API"
+                url = "https://github.com/unongmilkumk/Scissors"
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "Unongmilk"
+                        name = "Yoo Nongmilk"
+                        email = "unongmilkumk@gmail.com"
+                    }
+                }
+                scm {
+                    connection = "scm:git://github.com/unongmilkumk/Scissors.git"
+                    developerConnection = "scm:git:https://github.com/unongmilkumk/Scissors.git"
+                    url = "https://github.com/unongmilkumk/Scissors"
+                }
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+

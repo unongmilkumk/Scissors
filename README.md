@@ -5,6 +5,10 @@
 - Paper Server
 - Basic of the Plugin Development Concept
 
+## Feature
+- CommandMaker Does not Have to write a plugin.yml commands:
+
+
 ## Usage
 
 ### CommandMaker
