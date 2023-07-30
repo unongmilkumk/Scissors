@@ -17,7 +17,7 @@ apply plugin: "maven-publish"
 apply plugin: "signing"
 
 group = "com.scissors"
-version = "1.0"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
