@@ -6,29 +6,29 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class GuiMaker {
-    public Inventory inventory;
+    public Inventory gui;
     public GuiMaker(Player player) {
-        inventory = player.getInventory();
+        gui = player.getInventory();
     }
     public GuiMaker(String title) {
-        inventory = Bukkit.createInventory(null, 54, title);
+        gui = Bukkit.createInventory(null, 54, title);
     }
     public GuiMaker(String title, int size) {
-        inventory = Bukkit.createInventory(null, size, title);
+        gui = Bukkit.createInventory(null, size, title);
     }
     public GuiMaker(String title, int height, int width) {
-        inventory = Bukkit.createInventory(null, (height - 1) * 9 + (width - 1) , title);
+        gui = Bukkit.createInventory(null, (height - 1) * 9 + (width - 1) , title);
     }
     public void set(int index, ItemStack item) {
-        inventory.setItem(index, item);
+        gui.setItem(index, item);
     }
     public void set(int row, int column, ItemStack item) {
-        inventory.setItem((row - 1) * 9 + (column - 1), item);
+        gui.setItem((row - 1) * 9 + (column - 1), item);
     }
     public ItemStack get(int index) {
-        return inventory.getItem(index);
+        return gui.getItem(index);
     }
     public ItemStack get(int row, int column) {
-        return inventory.getItem((row - 1) * 9 + (column - 1));
+        return gui.getItem((row - 1) * 9 + (column - 1));
     }
 }

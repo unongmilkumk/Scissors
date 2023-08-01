@@ -9,33 +9,33 @@ import org.bukkit.inventory.meta.SkullMeta;
 import java.util.List;
 
 public class PlayerHeadMaker {
-    public final ItemStack item;
+    public final ItemStack head;
     public PlayerHeadMaker(String name) {
         ItemStack head = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta meta = (SkullMeta) head.getItemMeta();
         meta.setOwningPlayer(Bukkit.getOfflinePlayer(name));
         head.setItemMeta(meta);
-        this.item = head;
+        this.head = head;
     }
     public PlayerHeadMaker(ItemStack item) {
-        this.item = item;
+        this.head = item;
     }
     public PlayerHeadMaker name(String name) {
-        ItemMeta im = item.getItemMeta();
+        ItemMeta im = head.getItemMeta();
         im.setDisplayName(name);
-        item.setItemMeta(im);
+        head.setItemMeta(im);
         return this;
     }
     public PlayerHeadMaker lore(List<String> lore) {
-        ItemMeta im = item.getItemMeta();
+        ItemMeta im = head.getItemMeta();
         im.setLore(lore);
-        item.setItemMeta(im);
+        head.setItemMeta(im);
         return this;
     }
     public PlayerHeadMaker unbreakable(boolean unbreakable) {
-        ItemMeta im = item.getItemMeta();
+        ItemMeta im = head.getItemMeta();
         im.setUnbreakable(unbreakable);
-        item.setItemMeta(im);
+        head.setItemMeta(im);
         return this;
     }
 }
