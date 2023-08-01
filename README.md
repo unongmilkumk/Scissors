@@ -53,6 +53,18 @@ dependencies {
 - Initializing : ```new Region(<World>, <x, y, z>, <x, y, z>)``` or ```new Region(<Location>, <Location>)```
 - Contains : ```Region#.contains(<Region or Location>)```
 
+### PlayerHeadMaker
+- Initializing : ```new PlayerHeadMaker(<player name>)```
+- Name Setting : ```ItemMaker#.name(<name>)```
+- Lore Setting : ```ItemMaker#.lore(<list of lore>)```
+- Unbreakable Setting : ```ItemMaker#.unbreakable(true / false)```
+
+### GuiMaker
+- Initializing : ```new GuiMaker(<Player>)``` (Player Inventory) or 
+```new GuiMaker(<Name>)``` (Custom Inventory)
+- Set : ```GuiMaker#.set( [<Index> or <Rows, Column>], <ItemStack> )```
+- Get : ```GuiMaker#.get( [<Index> or <Rows, Column>] )```
+
 
 ## Examples
 
@@ -62,8 +74,15 @@ dependencies {
 new CommandMaker("sciplugin", "scissors").setCommand((sender, args) -> {
   sender.sendMessage("scissors");
   if (sender instanceof Player player) {
-      player.getInventory().addItem(new ItemMaker(Material.DIAMOND_SWORD).name("Ultra Sword")
-      .lore(List.of("This is a Ultra Sword")).unbreakable(true).item);
+      player.getInventory().addItem(
+          new ItemMaker(Material.DIAMOND_SWORD)
+          .name("Ultra Sword")
+          .lore(List.of(
+                  "This is a Ultra Sword"
+              )
+          )
+          .unbreakable(true).item
+      );
   }
   }).setAlias(List.of("sci")).register();
 ```

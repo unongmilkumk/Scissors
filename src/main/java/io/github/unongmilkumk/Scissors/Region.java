@@ -1,4 +1,4 @@
-package io.github.unongmilkumk;
+package io.github.unongmilkumk.Scissors;
 
 import org.bukkit.Location;
 import org.bukkit.World;

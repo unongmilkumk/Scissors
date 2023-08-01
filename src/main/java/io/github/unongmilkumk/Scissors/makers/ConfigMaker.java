@@ -1,4 +1,4 @@
-package io.github.unongmilkumk;
+package io.github.unongmilkumk.Scissors.makers;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
