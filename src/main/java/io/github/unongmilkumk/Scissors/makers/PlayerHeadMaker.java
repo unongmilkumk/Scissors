@@ -3,6 +3,7 @@ package io.github.unongmilkumk.Scissors.makers;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -41,6 +42,12 @@ public class PlayerHeadMaker {
     }
     public PlayerHeadMaker enchantment(Enchantment enchantment, int level) {
         head.addEnchantment(enchantment, level);
+        return this;
+    }
+    public PlayerHeadMaker itemFlag(ItemFlag... itemFlags) {
+        ItemMeta im = head.getItemMeta();
+        im.addItemFlags(itemFlags);
+        head.setItemMeta(im);
         return this;
     }
 }

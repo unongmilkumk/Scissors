@@ -41,6 +41,8 @@ dependencies {
 - Name Setting : ```ItemMaker#.name(<name>)```
 - Lore Setting : ```ItemMaker#.lore(<list of lore>)```
 - Unbreakable Setting : ```ItemMaker#.unbreakable(true / false)```
+- Enchantment : ```ItemMaker#.enchantment(<Enchantment>, <level>)```
+- ItemFlag : ```ItemMaker.itemFlag(<ItemFlags>)```
 
 ### ConfigMaker
 - Initializing : ```new ConfigMaker(<Plugin>, "<ConfigName>.yml"```
@@ -55,9 +57,11 @@ dependencies {
 
 ### PlayerHeadMaker
 - Initializing : ```new PlayerHeadMaker(<player name>)```
-- Name Setting : ```ItemMaker#.name(<name>)```
-- Lore Setting : ```ItemMaker#.lore(<list of lore>)```
-- Unbreakable Setting : ```ItemMaker#.unbreakable(true / false)```
+- Name Setting : ```PlayerHeadMaker#.name(<name>)```
+- Lore Setting : ```PlayerHeadMaker#.lore(<list of lore>)```
+- Unbreakable Setting : ```PlayerHeadMaker#.unbreakable(true / false)```
+- - Enchantment : ```PlayerHeadMaker#.enchantment(<Enchantment>, <level>)```
+- ItemFlag : ```PlayerHeadMaker#.itemFlag(<ItemFlags>)```
 
 ### GuiMaker
 - Initializing : ```new GuiMaker(<Player>)``` (Player Inventory) or 
