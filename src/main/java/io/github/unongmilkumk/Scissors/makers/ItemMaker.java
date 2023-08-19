@@ -1,6 +1,8 @@
 package io.github.unongmilkumk.Scissors.makers;
 
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -29,6 +31,16 @@ public class ItemMaker {
     public ItemMaker unbreakable(boolean unbreakable) {
         ItemMeta im = item.getItemMeta();
         im.setUnbreakable(unbreakable);
+        item.setItemMeta(im);
+        return this;
+    }
+    public ItemMaker enchantment(Enchantment enchantment, int level) {
+        item.addEnchantment(enchantment, level);
+        return this;
+    }
+    public ItemMaker itemFlag(ItemFlag... itemFlags) {
+        ItemMeta im = item.getItemMeta();
+        im.addItemFlags(itemFlags);
         item.setItemMeta(im);
         return this;
     }
