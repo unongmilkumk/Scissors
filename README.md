@@ -68,6 +68,13 @@ dependencies {
 ```new GuiMaker(<Name>)``` (Custom Inventory)
 - Set : ```GuiMaker#.set( [<Index> or <Rows, Column>], <ItemStack> )```
 - Get : ```GuiMaker#.get( [<Index> or <Rows, Column>] )```
+- 
+### KoreanPack
+- Korean To English, English To Korean : ```KoreanPack#.mergeLanguage(<value>)```
+- English To Korean : ```KoreanPack#.englishToKorean(<value>)```
+- Korean To English : ```KoreanPack#.koreanToEnglish(<value>)```
+- Split Korean : ```KoreanPack#.splitKorean(<value>)```
+- Join Korean : ```KoreanPack#.joinKorean(<value>)```
 
 
 ## Examples
