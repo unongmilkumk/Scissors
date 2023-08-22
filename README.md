@@ -60,7 +60,7 @@ dependencies {
 - Name Setting : ```PlayerHeadMaker#.name(<name>)```
 - Lore Setting : ```PlayerHeadMaker#.lore(<list of lore>)```
 - Unbreakable Setting : ```PlayerHeadMaker#.unbreakable(true / false)```
-- - Enchantment : ```PlayerHeadMaker#.enchantment(<Enchantment>, <level>)```
+- Enchantment : ```PlayerHeadMaker#.enchantment(<Enchantment>, <level>)```
 - ItemFlag : ```PlayerHeadMaker#.itemFlag(<ItemFlags>)```
 
 ### GuiMaker
