@@ -28,7 +28,7 @@ public class KoreanPack {
     public static String mergeLanguage(String string) {
         StringBuilder text = new StringBuilder();
         for (int ind = 0; ind <= string.length() - 1; ind++) {
-            char i = string.toCharArray()[0];
+            char i = string.toCharArray()[ind];
             if ((int) i >= 0xAC00 && (int) i <= 0xD7AF) {
                 text.append(koreanToEnglish(String.valueOf(i)));
             } else if (((int) i >= 0x0041 && (int) i <= 0x005A) || ((int) i >= 0x0061 && (int) i <= 0x007A)) {
@@ -82,7 +82,7 @@ public class KoreanPack {
         for (int it = 0; it <= text.toCharArray().length - 1; it++) {
             String now = String.valueOf(text.toCharArray()[it]);
             String next;
-            if (text.toCharArray()[text.length() - 1] != it) next = String.valueOf(text.toCharArray()[it + 1]);
+            if (text.length() - 1 != it) next = String.valueOf(text.toCharArray()[it + 1]);
             else next = "";
             if (!CHO.contains(now) && !JOONG.contains(now) && !JONG.contains(now)) {
                 texts.add(new ArrayList<>(List.of(now)));
@@ -90,7 +90,7 @@ public class KoreanPack {
                 texts.add(new ArrayList<>(List.of(now)));
             } else {
                 if (texts.isEmpty()) texts.add(new ArrayList<>(List.of()));
-                texts.get(text.length()).add(now);
+                texts.get(texts.size() - 1).add(now);
             }
         }
         var tt = new Object() {
@@ -100,11 +100,15 @@ public class KoreanPack {
             switch (it.size()) {
                 case 1 -> tt.t += it.get(0);
                 case 2 -> tt.t += combine(CHO.indexOf(it.get(0)), JOONG.indexOf(it.get(1)), 0);
-                case 3 ->
-                   tt.t += JOONG.contains(it.get(2)) ? combine(CHO.indexOf(it.get(0)), JOONG.indexOf(softMergeKorean(it.get(1), it.get(2))), 0)
-                     : combine(CHO.indexOf(it.get(0)), JOONG.indexOf(it.get(1)), JONG.indexOf(it.get(2)));
+                case 3 ->{
+                    if (JOONG.contains(it.get(2))) {
+                        tt.t += combine(CHO.indexOf(it.get(0)), JOONG.indexOf(softMergeKorean(it.get(1), it.get(2))), 0);
+                    } else {
+                        tt.t += combine(CHO.indexOf(it.get(0)), JOONG.indexOf(it.get(1)), JONG.indexOf(it.get(2)));
+                    }
+                }
                 case 4 -> tt.t += JOONG.contains(it.get(2)) ? combine(CHO.indexOf(it.get(0)), JOONG.indexOf(softMergeKorean(it.get(1), it.get(2))), JONG.indexOf(it.get(3)))
-                  : combine(CHO.indexOf(it.get(0)), JOONG.indexOf(it.get(1)), JONG.indexOf(softMergeKorean(it.get(2), it.get(3))));
+                        : combine(CHO.indexOf(it.get(0)), JOONG.indexOf(it.get(1)), JONG.indexOf(softMergeKorean(it.get(2), it.get(3))));
                 case 5 -> tt.t += combine(CHO.indexOf(it.get(0)), JOONG.indexOf(softMergeKorean(it.get(1), it.get(2))), JONG.indexOf(softMergeKorean(it.get(3), it.get(4))));
             }
         });
@@ -112,24 +116,24 @@ public class KoreanPack {
     }
 
     public static String softMergeKorean(String a, String b) {
-        if (a.equals("ㄱ") && b.equals("ㅅ")) return "ㄳ'";
-        if (a.equals("ㄴ") && b.equals("ㅈ")) return "ㄵ'";
-        if (a.equals("ㄴ") && b.equals("ㅎ")) return "ㄶ'";
-        if (a.equals("ㄹ") && b.equals("ㄱ")) return "ㄺ'";
-        if (a.equals("ㄹ") && b.equals("ㅁ")) return "ㄻ'";
-        if (a.equals("ㄹ") && b.equals("ㅂ")) return "ㄼ'";
-        if (a.equals("ㄹ") && b.equals("ㅅ")) return "ㄽ'";
-        if (a.equals("ㄹ") && b.equals("ㅌ")) return "ㄾ'";
-        if (a.equals("ㄹ") && b.equals("ㅍ")) return "ㄿ'";
-        if (a.equals("ㄹ") && b.equals("ㅎ")) return "ㅀ'";
-        if (a.equals("ㅂ") && b.equals("ㅅ")) return "ㅄ'";
-        if (a.equals("ㅗ") && b.equals("ㅏ")) return "ㅘ'";
-        if (a.equals("ㅗ") && b.equals("ㅐ")) return "ㅙ'";
-        if (a.equals("ㅗ") && b.equals("ㅣ")) return "ㅚ'";
-        if (a.equals("ㅜ") && b.equals("ㅓ")) return "ㅝ'";
-        if (a.equals("ㅜ") && b.equals("ㅔ")) return "ㅞ'";
-        if (a.equals("ㅜ") && b.equals("ㅣ")) return "ㅟ'";
-        if (a.equals("ㅡ") && b.equals("ㅣ")) return "ㅢ'";
+        if (a.equals("ㄱ") && b.equals("ㅅ")) return "ㄳ";
+        if (a.equals("ㄴ") && b.equals("ㅈ")) return "ㄵ";
+        if (a.equals("ㄴ") && b.equals("ㅎ")) return "ㄶ";
+        if (a.equals("ㄹ") && b.equals("ㄱ")) return "ㄺ";
+        if (a.equals("ㄹ") && b.equals("ㅁ")) return "ㄻ";
+        if (a.equals("ㄹ") && b.equals("ㅂ")) return "ㄼ";
+        if (a.equals("ㄹ") && b.equals("ㅅ")) return "ㄽ";
+        if (a.equals("ㄹ") && b.equals("ㅌ")) return "ㄾ";
+        if (a.equals("ㄹ") && b.equals("ㅍ")) return "ㄿ";
+        if (a.equals("ㄹ") && b.equals("ㅎ")) return "ㅀ";
+        if (a.equals("ㅂ") && b.equals("ㅅ")) return "ㅄ";
+        if (a.equals("ㅗ") && b.equals("ㅏ")) return "ㅘ";
+        if (a.equals("ㅗ") && b.equals("ㅐ")) return "ㅙ";
+        if (a.equals("ㅗ") && b.equals("ㅣ")) return "ㅚ";
+        if (a.equals("ㅜ") && b.equals("ㅓ")) return "ㅝ";
+        if (a.equals("ㅜ") && b.equals("ㅔ")) return "ㅞ";
+        if (a.equals("ㅜ") && b.equals("ㅣ")) return "ㅟ";
+        if (a.equals("ㅡ") && b.equals("ㅣ")) return "ㅢ";
         return "?";
     }
 
