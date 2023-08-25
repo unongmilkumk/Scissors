@@ -28,53 +28,19 @@ dependencies {
 }
 ```
 
-## How to Use
+## List Of API
 
-### CommandMaker
-- Initializing : ```new CommandMaker("<namespace>", "<command name>")```
-- Command Execute Setting : ```CommandMaker#.setCommand((sender, args) -> { <Codes> }```
-- Command Alias Setting : ```CommandMaker#.setAlias(<List of Alias>)```
-- Register : ```CommandMaker#.register()```
+CommandMaker
 
-### ItemMaker
-- Initializing : ```new ItemMaker(<Material>)``` (MakeItem) or ```new itemMaker(<Item>)``` (CopyItem)
-- Name Setting : ```ItemMaker#.name(<name>)```
-- Lore Setting : ```ItemMaker#.lore(<list of lore>)```
-- Unbreakable Setting : ```ItemMaker#.unbreakable(true / false)```
-- Enchantment : ```ItemMaker#.enchantment(<Enchantment>, <level>)```
-- ItemFlag : ```ItemMaker.itemFlag(<ItemFlags>)```
+ItemMaker
 
-### ConfigMaker
-- Initializing : ```new ConfigMaker(<Plugin>, "<ConfigName>.yml"```
-- Has : ```ConfigMaker#.has(<path>)``` -> Boolean of Contains "path"
-- Get : ```ConfigMaker#.get(<path>)``` -> value of "path"
-- Set : ```ConfigMaker#.set(<path>, <value>)``` -> set value of "path"
-- Save : ```ConfigMaker#.save()``` -> Save Config
+ConfigMaker
 
-### Region
-- Initializing : ```new Region(<World>, <x, y, z>, <x, y, z>)``` or ```new Region(<Location>, <Location>)```
-- Contains : ```Region#.contains(<Region or Location>)```
+Region
 
-### PlayerHeadMaker
-- Initializing : ```new PlayerHeadMaker(<player name>)```
-- Name Setting : ```PlayerHeadMaker#.name(<name>)```
-- Lore Setting : ```PlayerHeadMaker#.lore(<list of lore>)```
-- Unbreakable Setting : ```PlayerHeadMaker#.unbreakable(true / false)```
-- Enchantment : ```PlayerHeadMaker#.enchantment(<Enchantment>, <level>)```
-- ItemFlag : ```PlayerHeadMaker#.itemFlag(<ItemFlags>)```
+PlayerHeadMaker
 
-### GuiMaker
-- Initializing : ```new GuiMaker(<Player>)``` (Player Inventory) or 
-```new GuiMaker(<Name>)``` (Custom Inventory)
-- Set : ```GuiMaker#.set( [<Index> or <Rows, Column>], <ItemStack> )```
-- Get : ```GuiMaker#.get( [<Index> or <Rows, Column>] )```
-- 
-### KoreanPack
-- Korean To English, English To Korean : ```KoreanPack#.mergeLanguage(<value>)```
-- English To Korean : ```KoreanPack#.englishToKorean(<value>)```
-- Korean To English : ```KoreanPack#.koreanToEnglish(<value>)```
-- Split Korean : ```KoreanPack#.splitKorean(<value>)```
-- Join Korean : ```KoreanPack#.joinKorean(<value>)```
+KoreanPack
 
 
 ## Examples

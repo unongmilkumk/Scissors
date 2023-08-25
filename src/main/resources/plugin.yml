@@ -1,4 +1,0 @@
-name: Scissors
-version: '${version}'
-main: com.scissors.Main
-api-version: 1.20

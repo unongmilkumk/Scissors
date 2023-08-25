@@ -7,11 +7,11 @@ import java.util.List;
 public class KoreanPack {
     public static ArrayList<String> koreans = new ArrayList<>(Arrays.asList("ㅂ", "ㅈ", "ㄷ", "ㄱ", "ㅅ", "ㅛ", "ㅕ", "ㅑ", "ㅐ", "ㅔ", "ㅁ", "ㄴ", "ㅇ", "ㄹ", "ㅎ", "ㅗ", "ㅓ", "ㅏ",
             "ㅣ", "ㅋ", "ㅌ", "ㅊ", "ㅍ", "ㅠ", "ㅜ", "ㅡ", "ㄳ", "ㄵ", "ㄶ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅄ", "ㅘ", "ㅙ", "ㅚ", "ㅝ", "ㅞ", "ㅟ", "ㅢ",
-            "ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ"));
+            "ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ", "ㅖ", "ㅒ"));
 
     public static ArrayList<String> englishes = new ArrayList<>(Arrays.asList("q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k",
             "l", "z", "x", "c", "v", "b", "n", "m", "rt", "sw", "sg", "fr", "fa", "fq", "ft", "fx", "fv", "fg", "qt", "hk", "ho", "hl", "nj", "np", "nl", "ml",
-            "R", "E", "Q", "T", "W"));
+            "R", "E", "Q", "T", "W", "P", "O"));
 
     public static ArrayList<String> CHO = new ArrayList<>(Arrays.asList(
             "ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ",
@@ -26,18 +26,18 @@ public class KoreanPack {
             "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
     ));
     public static String mergeLanguage(String string) {
-        StringBuilder text = new StringBuilder();
+        String text = "";
         for (int ind = 0; ind <= string.length() - 1; ind++) {
             char i = string.toCharArray()[ind];
             if ((int) i >= 0xAC00 && (int) i <= 0xD7AF) {
-                text.append(koreanToEnglish(String.valueOf(i)));
+                text += koreanToEnglish(String.valueOf(i));
             } else if (((int) i >= 0x0041 && (int) i <= 0x005A) || ((int) i >= 0x0061 && (int) i <= 0x007A)) {
-                text.append(englishToKorean(String.valueOf(i)));
+                text += englishToKorean(String.valueOf(i));
             } else {
-                text.append(i);
+                text += i;
             }
         }
-        return joinKorean(text.toString());
+        return joinKorean(text);
     }
     public static String koreanToEnglish(String string) {
         String text = splitKorean(string);
@@ -86,7 +86,8 @@ public class KoreanPack {
             else next = "";
             if (!CHO.contains(now) && !JOONG.contains(now) && !JONG.contains(now)) {
                 texts.add(new ArrayList<>(List.of(now)));
-            } else if (JOONG.contains(next) && !JOONG.contains(now)) {
+                texts.add(new ArrayList<>());
+            } else if (JOONG.contains(next) && CHO.contains(now)) {
                 texts.add(new ArrayList<>(List.of(now)));
             } else {
                 if (texts.isEmpty()) texts.add(new ArrayList<>(List.of()));
