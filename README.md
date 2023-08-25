@@ -24,14 +24,13 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.unongmilkumk:Scissors:1.2.0'
+    implementation 'io.github.unongmilkumk:Scissors:1.2.1'
 }
 ```
 
 ## List Of API
 
 CommandMaker
-
 ItemMaker
 
 ConfigMaker
