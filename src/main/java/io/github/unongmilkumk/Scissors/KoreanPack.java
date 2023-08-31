@@ -2,7 +2,7 @@ package io.github.unongmilkumk.Scissors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
 
 public class KoreanPack {
     public static ArrayList<String> koreans = new ArrayList<>(Arrays.asList("ㅂ", "ㅈ", "ㄷ", "ㄱ", "ㅅ", "ㅛ", "ㅕ", "ㅑ", "ㅐ", "ㅔ", "ㅁ", "ㄴ", "ㅇ", "ㄹ", "ㅎ", "ㅗ", "ㅓ", "ㅏ",
@@ -25,6 +25,160 @@ public class KoreanPack {
             "", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ",
             "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
     ));
+    public static ArrayList<String> SNum = new ArrayList<>(Arrays.asList(
+            "일", "이", "삼", "사", "오", "육", "칠", "팔", "구"
+    ));
+    public static ArrayList<String> Num = new ArrayList<>(Arrays.asList(
+            "", "만", "억", "조", "경", "해", "양", "자"
+    ));
+    public static ArrayList<String> Numm = new ArrayList<>(Arrays.asList(
+            "자", "양", "해", "경", "조", "억", "만"
+    ));
+    public static String numberToKorean(int number) {
+        String text = "";
+        String nt = String.valueOf(number).replace("-", "");
+        ArrayList<String> inte = new ArrayList<>();
+        ArrayList<String> texts = new ArrayList<>();
+        inte.add("");
+
+        int a = 0;
+        while (a <= nt.length() - 1) {
+            int now = Integer.parseInt(String.valueOf(nt.toCharArray()[nt.length() - 1 - a]));
+            if (inte.get(inte.size() - 1).equals("")) {
+                inte.set(inte.size() - 1, String.valueOf(now));
+            } else if (Integer.parseInt(inte.get(inte.size() - 1)) >= 1000) {
+                inte.add("");
+                inte.set(inte.size() - 1, String.valueOf(now));
+            } else {
+                inte.set(inte.size() - 1, now + inte.get(inte.size() - 1));
+            }
+            a += 1;
+        }
+        int b = 0;
+        for (String integer : inte) {
+            texts.add(Num.get(b));
+            texts.add(smallNumberToKorean(Integer.parseInt(integer), b == 1));
+            b++;
+        }
+        Collections.reverse(texts);
+        for (String s : texts) {
+            text += s;
+        }
+        if (number < 0) text = "마이너스 " + text;
+        return text;
+    }
+    private static String smallNumberToKorean(int number, boolean isForMan) {
+        String text = "";
+        if (number == 0) {
+            return "";
+        }
+        if (number == 1 && !isForMan) {
+            return "일";
+        }
+        switch (getDigit(number, 4)) {
+            case 1 -> text += "천";
+            case 2, 3, 4, 5, 6, 7, 8, 9 -> {
+                text += SNum.get(getDigit(number, 4) - 1);
+                text += "천";
+            }
+        }
+        switch (getDigit(number, 3)) {
+            case 1 -> text += "백";
+            case 2, 3, 4, 5, 6, 7, 8, 9 -> {
+                text += SNum.get(getDigit(number, 3) - 1);
+                text += "백";
+            }
+        }
+        switch (getDigit(number, 2)) {
+            case 1 -> text += "십";
+            case 2, 3, 4, 5, 6, 7, 8, 9 -> {
+                text += SNum.get(getDigit(number, 2) - 1);
+                text += "십";
+            }
+        }
+        switch (getDigit(number, 1)) {
+            case 1, 2, 3, 4, 5, 6, 7, 8, 9 -> text += SNum.get(getDigit(number, 1) - 1);
+        }
+        return text;
+    }
+    public static int getDigit(int number, int a) {
+        return (int) ((number / Math.pow(10, a-1)) % 10);
+    }
+    public static int koreanToNumber(String korean) {
+        if (korean.equals("영") || korean.equals("마이너스 영")) return 0;
+        int ret = 0;
+        ArrayList<Integer> ints = new ArrayList<>();
+        String kor = korean.replace("마이너스 ", "");
+        for (String s : Numm) {
+            if (!kor.contains(s)) continue;
+            String string = kor.split(s)[0];
+            if (s.equals("만") && string.equals("")) {
+                ints.add(1);
+                kor = kor.split("만")[1];
+                continue;
+            }
+            kor = kor.split(s)[1];
+            ints.add(smallKoreanToNumber(string));
+        }
+
+        ints.add(smallKoreanToNumber(kor));
+
+        Collections.reverse(ints);
+
+        int temp = 1;
+        for (Integer anInt : ints) {
+            ret += anInt * temp;
+            temp *= 10000;
+        }
+        if (korean.contains("마이너스")) ret *= -1;
+        return ret;
+    }
+    private static int smallKoreanToNumber(String korean) {
+        String ret = "";
+        ArrayList<Integer> integers = new ArrayList<>();
+        String cc = "";
+        for (char c : korean.toCharArray()) {
+            switch (c) {
+                case '천' -> {
+                    if (cc.equals("")) {
+                        integers.add(1);
+                    } else {
+                        integers.add(SNum.indexOf(cc) + 1);
+                    }
+                    cc = "";
+                }
+                case '백' -> {
+                    if (!korean.contains("천")) integers.add(0);
+                    if (cc.equals("")) {
+                        integers.add(1);
+                    } else {
+                        integers.add(SNum.indexOf(cc) + 1);
+                    }
+                    cc = "";
+                }
+                case '십' -> {
+                    if (!korean.contains("백")) {
+                        if (!korean.contains("천")) integers.add(0);
+                        integers.add(0);
+                    }
+                    if (cc.equals("")) {
+                        integers.add(1);
+                    } else {
+                        integers.add(SNum.indexOf(cc) + 1);
+                    }
+                    cc = "";
+                }
+                default -> {
+                    cc += c;
+                }
+            }
+        }
+        integers.add(SNum.indexOf(cc) + 1);
+        for (Integer integer : integers) {
+            ret += String.valueOf(integer);
+        }
+        return Integer.parseInt(ret);
+    }
     public static String mergeLanguage(String string) {
         String text = "";
         for (int ind = 0; ind <= string.length() - 1; ind++) {
@@ -80,17 +234,25 @@ public class KoreanPack {
     public static String joinKorean(String text) {
         ArrayList<ArrayList<String>> texts = new ArrayList<>();
         for (int it = 0; it <= text.toCharArray().length - 1; it++) {
+            String prev4 = it > 3 ? String.valueOf(text.toCharArray()[it - 4]) : "";
+            String prev3 = it > 2 ? String.valueOf(text.toCharArray()[it - 3]) : "";
+            String prev2 = it > 1 ? String.valueOf(text.toCharArray()[it - 2]) : "";
+            String prev = it > 0 ? String.valueOf(text.toCharArray()[it - 1]) : "";
             String now = String.valueOf(text.toCharArray()[it]);
-            String next;
-            if (text.length() - 1 != it) next = String.valueOf(text.toCharArray()[it + 1]);
-            else next = "";
-            if (!CHO.contains(now) && !JOONG.contains(now) && !JONG.contains(now)) {
-                texts.add(new ArrayList<>(List.of(now)));
-                texts.add(new ArrayList<>());
-            } else if (JOONG.contains(next) && CHO.contains(now)) {
-                texts.add(new ArrayList<>(List.of(now)));
+            if (JOONG.contains(now) && CHO.contains(prev)) {
+                texts.get(texts.size() - 1).add(now);
+            } else if (JONG.contains(now) && JOONG.contains(prev) && CHO.contains(prev2)) {
+                texts.get(texts.size() - 1).add(now);
+            } else if (JONG.contains(softMergeKorean(prev, now)) && JOONG.contains(prev2) && CHO.contains(prev3)) {
+                texts.get(texts.size() - 1).add(now);
+            } else if (JOONG.contains(softMergeKorean(prev, now)) && CHO.contains(prev2)) {
+                texts.get(texts.size() - 1).add(now);
+            } else if (JONG.contains(now) && JOONG.contains(softMergeKorean(prev2, prev)) && CHO.contains(prev3)) {
+                texts.get(texts.size() - 1).add(now);
+            } else if (JONG.contains(softMergeKorean(prev, now)) && JOONG.contains(softMergeKorean(prev3, prev2)) && CHO.contains(prev4)) {
+                texts.get(texts.size() - 1).add(now);
             } else {
-                if (texts.isEmpty()) texts.add(new ArrayList<>(List.of()));
+                texts.add(new ArrayList<>());
                 texts.get(texts.size() - 1).add(now);
             }
         }
@@ -135,7 +297,7 @@ public class KoreanPack {
         if (a.equals("ㅜ") && b.equals("ㅔ")) return "ㅞ";
         if (a.equals("ㅜ") && b.equals("ㅣ")) return "ㅟ";
         if (a.equals("ㅡ") && b.equals("ㅣ")) return "ㅢ";
-        return "?";
+        return "nope";
     }
 
     private static char combine(int x1, int x2, int x3) {
