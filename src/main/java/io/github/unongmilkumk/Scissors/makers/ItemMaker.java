@@ -1,5 +1,6 @@
 package io.github.unongmilkumk.Scissors.makers;
 
+import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -9,7 +10,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.List;
 
 public class ItemMaker {
-    public final ItemStack item;
+    @Getter
+    private final ItemStack item;
     public ItemMaker(Material material) {
         this.item = new ItemStack(material);
     }
@@ -42,6 +44,11 @@ public class ItemMaker {
         ItemMeta im = item.getItemMeta();
         im.addItemFlags(itemFlags);
         item.setItemMeta(im);
+        return this;
+    }
+
+    public ItemMaker damage(short damage) {
+        item.setDurability(damage);
         return this;
     }
 }
