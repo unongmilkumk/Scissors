@@ -14,7 +14,7 @@ public class GuiMaker {
         gui = Bukkit.createInventory(null, 54, title);
     }
     public GuiMaker(String title, int size, boolean isSizeHeight) {
-        gui = Bukkit.createInventory(null, isHeight ? size * 9 : size, title);
+        gui = Bukkit.createInventory(null, isSizeHeight ? size * 9 : size, title);
     }
     public void set(int index, ItemStack item) {
         gui.setItem(index, item);
