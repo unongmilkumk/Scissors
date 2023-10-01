@@ -1,15 +1,10 @@
 package io.github.unongmilkumk.Scissors.player;
 
 import io.github.unongmilkumk.Scissors.player.modification.ScissorsBanLite;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public class ScissorsUser {
-    private Player p;
-    public ScissorsUser(Player p) {
-        this.p = p;
-    }
+public record ScissorsUser(Player p) {
 
     public Player getPlayer() {
         return p;
