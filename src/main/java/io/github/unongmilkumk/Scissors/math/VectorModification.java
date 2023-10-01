@@ -55,7 +55,7 @@ public class VectorModification {
      * @param value when VectorModification.pow(2.0) make it 1.0*2.0, so it make 2.0
      * @return Same class
      */
-    public VectorModification m(double value) {
+    public VectorModification multiply(double value) {
         vector.multiply(value);
         return this;
     }
