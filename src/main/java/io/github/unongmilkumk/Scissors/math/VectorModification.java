@@ -1,10 +1,8 @@
 package io.github.unongmilkumk.Scissors.math;
 
-import lombok.Getter;
 import org.bukkit.util.Vector;
 
 public class VectorModification {
-    @Getter
     private final Vector vector;
 
     public VectorModification(Vector v) {
