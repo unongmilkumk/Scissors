@@ -1,6 +1,5 @@
 package io.github.unongmilkumk.Scissors.makers;
 
-import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -11,8 +10,7 @@ import java.io.IOException;
 public class ConfigMaker {
     private final String fileName;
     private File file;
-    @Getter
-    public FileConfiguration config;
+    public final FileConfiguration config;
     public ConfigMaker(Plugin plugin, String fileName) {
         this.fileName = fileName;
         file = new File(plugin.getDataFolder(), fileName);
