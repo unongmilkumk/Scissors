@@ -12,42 +12,51 @@ import java.util.List;
 
 public class PlayerHeadMaker {
     public final ItemStack head;
+
     public PlayerHeadMaker(String name) {
-        ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+        this.head = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta meta = (SkullMeta) head.getItemMeta();
         meta.setOwningPlayer(Bukkit.getOfflinePlayer(name));
         head.setItemMeta(meta);
-        this.head = head;
     }
+
     public PlayerHeadMaker(ItemStack item) {
-        this.head = item;
+        this.head = item.clone();
     }
+
     public PlayerHeadMaker name(String name) {
-        ItemMeta im = head.getItemMeta();
-        im.setDisplayName(name);
-        head.setItemMeta(im);
-        return this;
+        return updateMeta(im -> im.setDisplayName(name));
     }
+
     public PlayerHeadMaker lore(List<String> lore) {
-        ItemMeta im = head.getItemMeta();
-        im.setLore(lore);
-        head.setItemMeta(im);
-        return this;
+        return updateMeta(im -> im.setLore(lore));
     }
+
     public PlayerHeadMaker unbreakable(boolean unbreakable) {
-        ItemMeta im = head.getItemMeta();
-        im.setUnbreakable(unbreakable);
-        head.setItemMeta(im);
-        return this;
+        return updateMeta(im -> im.setUnbreakable(unbreakable));
     }
+
     public PlayerHeadMaker enchantment(Enchantment enchantment, int level) {
         head.addEnchantment(enchantment, level);
         return this;
     }
+
     public PlayerHeadMaker itemFlag(ItemFlag... itemFlags) {
+        return updateMeta(im -> im.addItemFlags(itemFlags));
+    }
+
+    public ItemStack build() {
+        return head.clone();
+    }
+
+    private PlayerHeadMaker updateMeta(MetaUpdater updater) {
         ItemMeta im = head.getItemMeta();
-        im.addItemFlags(itemFlags);
+        updater.update(im);
         head.setItemMeta(im);
         return this;
+    }
+
+    private interface MetaUpdater {
+        void update(ItemMeta meta);
     }
 }

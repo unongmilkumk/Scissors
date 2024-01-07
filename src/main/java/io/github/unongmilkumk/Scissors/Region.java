@@ -21,9 +21,15 @@ public class Region {
         maxZ = Math.max(z1, z2);
     }
     public Region(Location location1, Location location2) {
-        this(location1.getWorld(), location1.getBlockX(), location1.getBlockY(), location1.getBlockZ(), location2.getBlockX(), location2.getBlockY(), location2.getBlockZ());
         this.world = location1.getWorld();
+        this.minX = Math.min(location1.getBlockX(), location2.getBlockX());
+        this.minY = Math.min(location1.getBlockY(), location2.getBlockY());
+        this.minZ = Math.min(location1.getBlockZ(), location2.getBlockZ());
+        this.maxX = Math.max(location1.getBlockX(), location2.getBlockX());
+        this.maxY = Math.max(location1.getBlockY(), location2.getBlockY());
+        this.maxZ = Math.max(location1.getBlockZ(), location2.getBlockZ());
     }
+
 
     public boolean contains(Location location) {
         return contains(location.getBlockX(), location.getBlockY(), location.getBlockZ());
@@ -38,11 +44,13 @@ public class Region {
         if (this == other) {
             return true;
         }
-        if (other instanceof Region region) {
-            return (world == region.world
-                    && minX == region.minX && minY == region.minY && minZ == region.minZ
-                    && maxX == region.maxX && maxY == region.maxY && maxZ == region.maxZ);
+        if (other == null || getClass() != other.getClass()) {
+            return false;
         }
-        return false;
+        Region region = (Region) other;
+        return world.equals(region.world)
+                && minX == region.minX && minY == region.minY && minZ == region.minZ
+                && maxX == region.maxX && maxY == region.maxY && maxZ == region.maxZ;
     }
+
 }
