@@ -99,6 +99,9 @@ public class ItemMaker {
         return this;
     }
 
+    /**
+     * Warning : Glow make the item unenchantable
+     */
     public ItemMaker glow() {
         ItemMeta im = item.getItemMeta();
         if (item.getType().equals(Material.FISHING_ROD)) im.addEnchant(Enchantment.LURE, 1, true);
