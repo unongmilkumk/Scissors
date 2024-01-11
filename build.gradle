@@ -7,7 +7,7 @@ apply plugin: "maven-publish"
 apply plugin: "signing"
 
 group = "io.github.unongmilkumk"
-version = "1.4.0"
+version = "1.4.2"
 
 repositories {
     mavenCentral()
@@ -74,7 +74,7 @@ publishing {
         mavenJava(MavenPublication) {
             groupId = "io.github.unongmilkumk"
             artifactId = "Scissors"
-            version = "1.4.0"
+            version = "1.4.2"
 
             from components.java
 
